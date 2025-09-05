@@ -25,10 +25,10 @@ function get_product_category_callback() {
       if ($product) {
           $categories = wp_get_post_terms($product->get_id(), 'product_cat');
           
-          // Retournez la première catégorie
+          // Retournez la liste des catégories
           if (!empty($categories)) {
-              $first_category = array_shift($categories);
-              echo $first_category->name;
+              $category_names = wp_list_pluck($categories, 'name');
+              echo implode(', ', $category_names);
           } else {
               echo "";
           }
